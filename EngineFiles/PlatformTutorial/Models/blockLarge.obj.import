@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3ecuvi3x1r07"
+path="res://.godot/imported/blockLarge.obj-98d2513ae9fb2a2f58b7d3a2c7bf2200.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockLarge.obj-98d2513ae9fb2a2f58b7d3a2c7bf2200.mesh"]
+
+source_file="res://PlatformTutorial/Models/blockLarge.obj"
+dest_files=["res://.godot/imported/blockLarge.obj-98d2513ae9fb2a2f58b7d3a2c7bf2200.mesh", "res://.godot/imported/blockLarge.obj-98d2513ae9fb2a2f58b7d3a2c7bf2200.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

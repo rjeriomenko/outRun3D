@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://de455wmxy2p5j"]
+
+[ext_resource type="Script" path="res://PlatformTutorial/Coin.gd" id="1_0xjx6"]
+[ext_resource type="ArrayMesh" uid="uid://cge2fuclikg8j" path="res://PlatformTutorial/Models/coinGold.obj" id="2_ogc8p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0y3k"]
+size = Vector3(0.514833, 0.600969, 0.14498)
+
+[node name="Coin" type="Area3D"]
+script = ExtResource("1_0xjx6")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = ExtResource("2_ogc8p")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00168157, 0.303246, 0)
+shape = SubResource("BoxShape3D_n0y3k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
