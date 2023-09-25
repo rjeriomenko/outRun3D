@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://uyn15a6ddm66"]
+
+[ext_resource type="Script" path="res://OutRun/Entities/Player/Player.gd" id="1_kyty8"]
+[ext_resource type="Script" path="res://OutRun/Entities/Player/ScoreTimer.gd" id="2_drfl3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w83db"]
+albedo_color = Color(0, 0.403922, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fpdlk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0jor"]
+
+[sub_resource type="Curve3D" id="Curve3D_gomwh"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -20.869, 0, 13.7655, 0, 0, 0, 0, 0, 0, 20.7401, 0, 13.657, 0, 0, 0, 0, 0, 0, 20.7156, 0, -14.7404, 0, 0, 0, 0, 0, 0, -20.8052, 0, -14.7829, 0, 0, 0, 0, 0, 0, -20.869, 0, 13.7655),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_lkhuk"]
+font_size = 80
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_kyty8")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_overlay = SubResource("StandardMaterial3D_w83db")
+mesh = SubResource("BoxMesh_fpdlk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_w0jor")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+current = true
+fov = 90.0
+
+[node name="MobSpawnPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_gomwh")
+
+[node name="MobSpawnLocation" type="PathFollow3D" parent="MobSpawnPath"]
+transform = Transform3D(0.00260741, 0, -0.999994, 0, 1, 0, 0.999994, 0, 0.00260741, -20.869, 0, 13.7655)
+
+[node name="ScoreText" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -86.0
+offset_right = 114.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "0"
+label_settings = SubResource("LabelSettings_lkhuk")
+horizontal_alignment = 1
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+script = ExtResource("2_drfl3")
+
+[connection signal="timeout" from="ScoreTimer" to="ScoreTimer" method="_on_timeout"]

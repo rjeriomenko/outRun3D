@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bu3japxpk06el"]
+[gd_scene load_steps=11 format=3 uid="uid://bu3japxpk06el"]
 
+[ext_resource type="Script" path="res://PlatformTutorial/PlatformLevel2.gd" id="1_ke753"]
 [ext_resource type="PackedScene" uid="uid://dl3wqkvu005en" path="res://PlatformTutorial/Platforms/PlatformLarge.tscn" id="1_mh2q4"]
 [ext_resource type="PackedScene" uid="uid://8a82u8a1skpp" path="res://PlatformTutorial/PlatformPlayer.tscn" id="2_fpwat"]
 [ext_resource type="PackedScene" uid="uid://bp6ajp4uaqyxw" path="res://PlatformTutorial/PlatformEnemy.tscn" id="3_23mn0"]
@@ -16,6 +17,8 @@ background_color = Color(0.772549, 0.662745, 0.992157, 1)
 size = Vector3(0.267527, 1.17246, 0.275949)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_ke753")
+main_menu = "res://OutRun/Menus/MainMenu.tscn"
 
 [node name="PlatformLarge" parent="." instance=ExtResource("1_mh2q4")]
 
@@ -108,5 +111,9 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EndFlag"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0486975, 0.583362, 0)
 shape = SubResource("BoxShape3D_3kw0e")
+
+[node name="Enemy3" parent="." instance=ExtResource("3_23mn0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9507, 4.77032, -3.22839)
+move_dir = Vector3(0, -3, 0)
 
 [connection signal="body_entered" from="EndFlag" to="EndFlag" method="_on_body_entered"]

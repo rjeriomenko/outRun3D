@@ -1,15 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://v8q75okxby3o"]
+[gd_scene load_steps=8 format=3 uid="uid://v8q75okxby3o"]
 
 [ext_resource type="PackedScene" uid="uid://dl3wqkvu005en" path="res://PlatformTutorial/Platforms/PlatformLarge.tscn" id="1_8gfgs"]
+[ext_resource type="Script" path="res://PlatformTutorial/PlatformLevel1.gd" id="1_kxec5"]
 [ext_resource type="PackedScene" uid="uid://8a82u8a1skpp" path="res://PlatformTutorial/PlatformPlayer.tscn" id="2_lktj6"]
 [ext_resource type="PackedScene" uid="uid://dqx688iareeaw" path="res://PlatformTutorial/EndFlag.tscn" id="4_q8ifq"]
 [ext_resource type="PackedScene" uid="uid://de455wmxy2p5j" path="res://PlatformTutorial/Coin.tscn" id="5_5y33j"]
+[ext_resource type="PackedScene" uid="uid://bp6ajp4uaqyxw" path="res://PlatformTutorial/PlatformEnemy.tscn" id="6_1j1p4"]
 
 [sub_resource type="Environment" id="Environment_k01ct"]
 background_mode = 1
 background_color = Color(0.615686, 0.815686, 1, 1)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_kxec5")
+main_menu = "res://OutRun/Menus/MainMenu.tscn"
 
 [node name="PlatformLarge" parent="." instance=ExtResource("1_8gfgs")]
 
@@ -33,3 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50195, 0.000569999, -2.281
 [node name="EndFlag" parent="." instance=ExtResource("4_q8ifq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67022, 0.000569999, -5.76453)
 next_scene = "res://PlatformTutorial/PlatformLevel2.tscn"
+
+[node name="Enemy2" parent="." instance=ExtResource("6_1j1p4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.707903, -0.457381, -2.91989)
+move_dir = Vector3(-6, 0, 0)

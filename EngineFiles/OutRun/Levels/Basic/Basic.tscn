@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://baw4t6bota0do"]
+
+[ext_resource type="Script" path="res://OutRun/Scripts/Level.gd" id="1_xnmk3"]
+[ext_resource type="PackedScene" uid="uid://bqhl7tmo2ibnp" path="res://OutRun/Entities/Testing/TestObject.tscn" id="2_18yrh"]
+[ext_resource type="PackedScene" uid="uid://bjci1d502pgak" path="res://OutRun/Levels/Basic/StaticObjects/Floor.tscn" id="3_00ch1"]
+[ext_resource type="PackedScene" uid="uid://dgom5yn7wu0wc" path="res://OutRun/Levels/Basic/StaticObjects/CameraCorners.tscn" id="4_gbl7l"]
+[ext_resource type="PackedScene" uid="uid://uyn15a6ddm66" path="res://OutRun/Entities/Player/Player.tscn" id="4_yaj85"]
+
+[sub_resource type="Environment" id="Environment_nrp7a"]
+background_mode = 1
+background_color = Color(0.905882, 1, 0.905882, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rokh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udgw6"]
+albedo_color = Color(1, 0.733333, 0.996078, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uhugj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnc68"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5q40"]
+albedo_color = Color(1, 0.733333, 0.996078, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmonn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po8np"]
+albedo_color = Color(1, 0.180392, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wpwc6"]
+material = SubResource("StandardMaterial3D_po8np")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_xnmk3")
+main_menu = "res://OutRun/Menus/MainMenu.tscn"
+mob_scene = ExtResource("2_18yrh")
+
+[node name="Floor" parent="." instance=ExtResource("3_00ch1")]
+
+[node name="Player" parent="." instance=ExtResource("4_yaj85")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.640927, 0.767602, 0, -0.767602, 0.640927, 0, 5.28932, 0)
+
+[node name="CameraCorners" parent="." instance=ExtResource("4_gbl7l")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nrp7a")
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="Walls" type="Node3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 50.5)
+
+[node name="Wall1" type="StaticBody3D" parent="Walls"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall1"]
+shape = SubResource("BoxShape3D_2rokh")
+
+[node name="Model" type="MeshInstance3D" parent="Walls/Wall1"]
+material_override = SubResource("StandardMaterial3D_udgw6")
+mesh = SubResource("BoxMesh_uhugj")
+
+[node name="Wall2" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -101)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall2"]
+shape = SubResource("BoxShape3D_2rokh")
+
+[node name="Model" type="MeshInstance3D" parent="Walls/Wall2"]
+material_override = SubResource("StandardMaterial3D_udgw6")
+mesh = SubResource("BoxMesh_uhugj")
+
+[node name="Wall3" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 100, -0.505, 0, -50.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall3"]
+shape = SubResource("BoxShape3D_dnc68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall3"]
+material_override = SubResource("StandardMaterial3D_w5q40")
+mesh = SubResource("BoxMesh_fmonn")
+
+[node name="Wall4" type="StaticBody3D" parent="Walls"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 100, 0.505, 0, -50.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Wall4"]
+shape = SubResource("BoxShape3D_dnc68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Wall4"]
+material_override = SubResource("StandardMaterial3D_w5q40")
+mesh = SubResource("BoxMesh_fmonn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("SphereMesh_wpwc6")
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

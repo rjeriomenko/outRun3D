@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgatkutf80p8s"]
+
+[ext_resource type="Script" path="res://OutRun/Menus/MainMenu.gd" id="1_8bv77"]
+
+[sub_resource type="Theme" id="Theme_xwtby"]
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_eg78j"]
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_us3ap"]
+default_font_size = 50
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8bv77")
+play_scene = "res://OutRun/Levels/Basic/Basic.tscn"
+platformer_scene = "res://PlatformTutorial/PlatformLevel1.tscn"
+controls_scene = "res://OutRun/Menus/ControlsMenu.tscn"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.5
+offset_top = -95.5
+offset_right = 152.5
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../Controls")
+theme = SubResource("Theme_xwtby")
+text = "Play"
+
+[node name="Platformer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_eg78j")
+text = "Secret Platformer"
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_bottom = NodePath("../Play")
+theme = SubResource("Theme_us3ap")
+text = "Controls"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Platformer" to="." method="_on_platformer_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]

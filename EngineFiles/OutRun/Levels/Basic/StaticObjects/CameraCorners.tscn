@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgom5yn7wu0wc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvhfr"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kgcpm"]
+material = SubResource("StandardMaterial3D_nvhfr")
+
+[node name="CameraCorners" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.09429, 0, -11.7156)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.645, 0, 0)
+mesh = SubResource("CylinderMesh_kgcpm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.6446, 0, 22.2784)
+mesh = SubResource("CylinderMesh_kgcpm")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.906, 0, 0)
+mesh = SubResource("CylinderMesh_kgcpm")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.9063, 0, 22.2784)
+mesh = SubResource("CylinderMesh_kgcpm")
+skeleton = NodePath("../..")

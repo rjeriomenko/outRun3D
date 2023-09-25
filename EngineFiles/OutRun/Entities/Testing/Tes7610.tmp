@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqhl7tmo2ibnp"]
+
+[ext_resource type="Script" path="res://OutRun/Entities/Testing/TestObject.gd" id="1_rdxe3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fpdlk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0jor"]
+
+[node name="TestObject" type="CharacterBody3D" groups=["Entity"]]
+script = ExtResource("1_rdxe3")
+move_speed = 10.0
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_fpdlk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_w0jor")
