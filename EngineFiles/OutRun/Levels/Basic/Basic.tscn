@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://baw4t6bota0do"]
 
 [ext_resource type="Script" path="res://OutRun/Scripts/Level.gd" id="1_xnmk3"]
-[ext_resource type="PackedScene" uid="uid://bqhl7tmo2ibnp" path="res://OutRun/Entities/Testing/TestObject.tscn" id="2_18yrh"]
+[ext_resource type="PackedScene" uid="uid://bjknkgqiysetm" path="res://OutRun/Entities/Enemies/Zombie.tscn" id="2_gku5d"]
 [ext_resource type="PackedScene" uid="uid://bjci1d502pgak" path="res://OutRun/Levels/Basic/StaticObjects/Floor.tscn" id="3_00ch1"]
 [ext_resource type="PackedScene" uid="uid://dgom5yn7wu0wc" path="res://OutRun/Levels/Basic/StaticObjects/CameraCorners.tscn" id="4_gbl7l"]
 [ext_resource type="PackedScene" uid="uid://uyn15a6ddm66" path="res://OutRun/Entities/Player/Player.tscn" id="4_yaj85"]
@@ -33,7 +33,7 @@ material = SubResource("StandardMaterial3D_po8np")
 [node name="Main" type="Node3D"]
 script = ExtResource("1_xnmk3")
 main_menu = "res://OutRun/Menus/MainMenu.tscn"
-mob_scene = ExtResource("2_18yrh")
+mob_scene = ExtResource("2_gku5d")
 
 [node name="Floor" parent="." instance=ExtResource("3_00ch1")]
 
@@ -48,7 +48,11 @@ transform = Transform3D(1, 0, 0, 0, 0.640927, 0.767602, 0, -0.767602, 0.640927, 
 environment = SubResource("Environment_nrp7a")
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.3
+autostart = true
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
 
 [node name="Walls" type="Node3D" parent="."]
@@ -98,3 +102,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("SphereMesh_wpwc6")
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

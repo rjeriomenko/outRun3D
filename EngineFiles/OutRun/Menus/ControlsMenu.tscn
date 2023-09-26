@@ -36,7 +36,13 @@ theme = SubResource("Theme_inv2w")
 layout_mode = 2
 text = "WASD - Movement
 Escape/P - Return to Main menu
-Space - Jump (Platformer Only)"
+Space - Jump (Platformer Only)
+
+HUD NUMBERS :
+Top left is your Level (Blue)
+Top right is your Health (Pink)
+Bottom right is the difficulty level (Red)
+Bottom center is your score (White)"
 label_settings = SubResource("LabelSettings_ishbr")
 horizontal_alignment = 1
 

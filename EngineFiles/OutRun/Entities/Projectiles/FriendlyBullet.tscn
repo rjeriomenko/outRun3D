@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0lfew8kbmk5d"]
+
+[ext_resource type="Script" path="res://OutRun/Entities/Projectiles/FriendlyBullet.gd" id="1_jyfma"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0e1c"]
+albedo_color = Color(0.439216, 0.478431, 1, 1)
+metallic = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_5opr1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ka7gv"]
+
+[node name="FriendlyBullet" type="Area3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_jyfma")
+life_time = 3.0
+
+[node name="Model" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_k0e1c")
+mesh = SubResource("BoxMesh_5opr1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ka7gv")
+
+[node name="LifeTimeTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LifeTimeTimer" to="." method="_on_life_time_timer_timeout"]

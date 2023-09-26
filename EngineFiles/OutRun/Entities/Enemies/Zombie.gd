@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var move_speed : float = 4.0
 @export var health : float = 1.0
-@export var damage : float = 3.0
+@export var damage : float = 10.0
 @export var experience : float = 1.0
 
 var player_in_contact : bool = false
@@ -38,3 +38,9 @@ func take_damage(amount):
 	if health <= 0:
 		player.award_experience(experience)
 		queue_free()
+
+func apply_difficulty(difficulty):
+	move_speed *= (difficulty * 0.9)
+	health *= difficulty
+	damage *= difficulty
+	experience *= difficulty

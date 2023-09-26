@@ -6,6 +6,9 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var highest_score = get_node("VBoxContainer/HighestScoreText")
+	highest_score.text = str("High Score: ", Score.highest_score)
+	
 	$VBoxContainer/Play.grab_focus()
 
 func _on_play_pressed():
