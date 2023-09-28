@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://baw4t6bota0do"]
+[gd_scene load_steps=14 format=3 uid="uid://baw4t6bota0do"]
 
 [ext_resource type="Script" path="res://OutRun/Scripts/Level.gd" id="1_xnmk3"]
-[ext_resource type="PackedScene" uid="uid://bjknkgqiysetm" path="res://OutRun/Entities/Enemies/Zombie.tscn" id="2_gku5d"]
 [ext_resource type="PackedScene" uid="uid://bjci1d502pgak" path="res://OutRun/Levels/Basic/StaticObjects/Floor.tscn" id="3_00ch1"]
 [ext_resource type="PackedScene" uid="uid://dgom5yn7wu0wc" path="res://OutRun/Levels/Basic/StaticObjects/CameraCorners.tscn" id="4_gbl7l"]
 [ext_resource type="PackedScene" uid="uid://uyn15a6ddm66" path="res://OutRun/Entities/Player/Player.tscn" id="4_yaj85"]
@@ -33,7 +32,6 @@ material = SubResource("StandardMaterial3D_po8np")
 [node name="Main" type="Node3D"]
 script = ExtResource("1_xnmk3")
 main_menu = "res://OutRun/Menus/MainMenu.tscn"
-mob_scene = ExtResource("2_gku5d")
 
 [node name="Floor" parent="." instance=ExtResource("3_00ch1")]
 

@@ -1,16 +1,27 @@
 extends Node3D
 
 @export_file("*.tscn") var main_menu
-@export var mob_scene: PackedScene
+#@export var zombie_scene: PackedScene
+#@export var big_zombie_scene: PackedScene
 @export var difficulty: float = 1
+
+var enemy_scenes_to_load = {}
+var enemy_scenes_names_and_weights = {}
+var enemy_scenes_weights_and_names = {}
+var total_enemy_weights: int
 
 @onready var difficulty_text : Label = get_node("Player/DifficultyText")
 @onready var mob_timer : Timer = get_node("MobTimer")
 @onready var start_mob_time = mob_timer.wait_time
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	preload_enemy_scenes()
+	apply_enemy_scene_weightings()
+
+#Import and add enemy scenes to dictionary
+func preload_enemy_scenes():
+	enemy_scenes_to_load["zombie"] = preload("res://OutRun/Entities/Enemies/Zombie.tscn")
+	enemy_scenes_to_load["big_zombie"] = preload("res://OutRun/Entities/Enemies/BigZombie.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,7 +36,7 @@ func _on_mob_timer_timeout():
 	
 func spawn_mobs():
 	#Create mob instance and apply difficulty to it
-	var mob = mob_scene.instantiate()
+	var mob = pick_random_mob_scene().instantiate()
 	mob.apply_difficulty(difficulty)
 	
 	#Choose default location on MobSpawnPath, which is stored in MobSpawnLocation
@@ -57,3 +68,21 @@ func increase_difficulty():
 	difficulty += 0.2
 	difficulty_text.text = str(difficulty)
 	mob_timer.wait_time = (start_mob_time * 1/difficulty)
+
+func apply_enemy_scene_weightings():
+	enemy_scenes_names_and_weights["zombie"] = 90
+	enemy_scenes_names_and_weights["big_zombie"] = 4
+	
+	for enemy_scene_name in enemy_scenes_names_and_weights:
+		var weight = enemy_scenes_names_and_weights[enemy_scene_name]
+		enemy_scenes_weights_and_names[(weight + total_enemy_weights)] = enemy_scene_name
+		total_enemy_weights += weight
+
+func pick_random_mob_scene():
+	var rand_num = randi_range(1, total_enemy_weights)
+	while !enemy_scenes_weights_and_names.has(rand_num):
+		rand_num += 1
+
+	var picked_enemy_name = enemy_scenes_weights_and_names[rand_num]
+
+	return enemy_scenes_to_load[picked_enemy_name]
